@@ -2,7 +2,7 @@ import './globals.css';
 import { Inter } from 'next/font/google';
 import Provider from './context/AuthContext';
 import ToasterContext from './context/ToasterContext';
-import Navbar from './components/Navbar';
+import Navbar from './Navbar';
 
 const inter = Inter({ subsets: [ 'latin' ] });
 
