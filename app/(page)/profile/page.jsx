@@ -1,12 +1,18 @@
 "use client";
 import { useSession } from 'next-auth/react';
 import { useRouter } from 'next/navigation';
+import { useEffect } from 'react';
 const Profile = () => {
     const route = useRouter()
     const { data: session } = useSession();
-    if (!session) {
-        route.push('/')
+
+    useEffect(() => {
+        if (!session) {
+            route.push('/')
+        }
     }
+    )
+
     return (
         <div class="p-4 lg:pt-20 md:pt-20">
             <div class="mb-4 text-center opacity-90">
