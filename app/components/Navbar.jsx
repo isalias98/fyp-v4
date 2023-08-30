@@ -3,7 +3,7 @@ import React from 'react';
 import { useSession, signOut } from 'next-auth/react';
 import Link from 'next/link';
 import Image from 'next/image';
-import { BiLogIn, BiSearch } from 'react-icons/bi';
+import { BiLogIn } from 'react-icons/bi';
 
 const Navbar = () => {
 	const { data: session } = useSession();
@@ -17,9 +17,6 @@ const Navbar = () => {
 					</Link>
 				</div>
 				<div className="flex-none gap-2">
-					<div className="form-control">
-						<input type="text" placeholder="Search" className="input input-bordered w-24 md:w-auto" />
-					</div>
 					{!session ? (
 						<Link href="/login" className="btn">
 							Login
@@ -43,8 +40,8 @@ const Navbar = () => {
 								{
 									session?.user?.role === "lister" ? (
 										<li>
-											<Link href={"/dashboard"}>
-												Dashboard
+											<Link href={"/posts"}>
+												My Postings
 											</Link>
 										</li>
 									) : ""
@@ -59,9 +56,6 @@ const Navbar = () => {
 				</div>
 			</div>
 			<div className="btm-nav md:hidden fixed lg:hidden justify-center outline outline-2 outline-blue-700">
-				<button className='text-4xl'>
-					<BiSearch />
-				</button>
 				<Link href={"/"}>
 					<Image src={"/logo.png"} width={50} height={50} alt="logo" />
 				</Link>
@@ -88,7 +82,7 @@ const Navbar = () => {
 							{
 								session?.user?.role === "lister" ? (
 									<li>
-										<Link href={"/dashboard"}>
+										<Link href={"/posts"}>
 											Dashboard
 										</Link>
 									</li>

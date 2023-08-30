@@ -2,16 +2,17 @@
 import { useSession } from 'next-auth/react';
 import { useRouter } from 'next/navigation';
 import { useEffect } from 'react';
+
 const Profile = () => {
     const route = useRouter()
     const { data: session } = useSession();
 
-    useEffect(() => {
-        if (!session) {
-            route.push('/')
-        }
-    }
-    )
+    // useEffect(() => {
+    //     if (!session) {
+    //         route.push('/')
+    //     }
+    // }
+    // )
 
     return (
         <div class="p-4 lg:pt-20 md:pt-20">
@@ -27,6 +28,13 @@ const Profile = () => {
                 <h1 class="text-2xl font-light text-gray-500 dark:text-gray-200">
                     I am a {session?.user?.role}
                 </h1>
+                <h1 class="text-2xl font-light text-gray-500 dark:text-gray-200">
+                    My rating is  {session?.user?.rating}
+                </h1>
+                <h1 class="text-2xl font-light text-gray-500 dark:text-gray-200">
+                    I am a {session?.user?.category}
+                </h1>
+                {JSON.stringify(session)}
             </div>
         </div>
 

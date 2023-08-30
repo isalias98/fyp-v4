@@ -4,9 +4,9 @@ import { NextResponse } from 'next/server';
 
 export async function POST(request) {
 	const body = await request.json();
-	const { name, email, password, role, categories } = body;
+	const { name, email, password, role, category, phoneNumber } = body;
 
-	if (!name || !email || !password || !role) {
+	if (!name || !email || !password || !role || !phoneNumber) {
 		return new NextResponse('Missing Fields', { status: 400 });
 	}
 
@@ -28,7 +28,8 @@ export async function POST(request) {
 			email,
 			hashedPassword,
 			role,
-			categories
+			category,
+			phoneNumber
 		}
 	});
 	return NextResponse.json(user);

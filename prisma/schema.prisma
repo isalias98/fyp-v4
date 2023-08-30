@@ -10,29 +10,37 @@ datasource db {
   url      = env("DATABASE_URL")
 }
 
-
 model User {
-  id        String   @id @default(auto()) @map("_id") @db.ObjectId
-  createdAt DateTime @default(now())
-  email     String   @unique
-  name      String?
+  id             String   @id @default(auto()) @map("_id") @db.ObjectId
+  createdAt      DateTime @default(now())
+  email          String   @unique
+  name           String?
   hashedPassword String?
-  role      String?   
-  categories String?
-  posts     Post[]
+  role           String?
+  category       String?
+  post           Post[]
+  like           Like[]
 }
 
 model Post {
-  id        String   @id @default(auto()) @map("_id") @db.ObjectId
-  createdAt DateTime @default(now())
-  updatedAt DateTime @updatedAt
-  published Boolean  @default(false)
-  title     String
-  author    User?    @relation(fields: [authorId], references: [id])
-  authorId  String   @db.ObjectId
+  id          String   @id @default(auto()) @map("_id") @db.ObjectId
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
+  published   Boolean  @default(false)
+  title       String?
+  description String?
+  category    String?
+  author      String?
+  phoneNumber String?
+  User        User?    @relation(fields: [userId], references: [id])
+  userId      String?  @db.ObjectId
+  like        Like[]
 }
 
-enum Role {
-  LISTER
-  FREELANCER
+model Like {
+  id     String  @id @default(auto()) @map("_id") @db.ObjectId
+  Post   Post?   @relation(fields: [postId], references: [id])
+  postId String? @db.ObjectId
+  User   User?   @relation(fields: [userId], references: [id])
+  userId String? @db.ObjectId
 }

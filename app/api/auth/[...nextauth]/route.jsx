@@ -25,7 +25,7 @@ export const authOptions = {
 						email: credentials.email
 					}
 				})
-				if(!user || !user?.hashedPassword) {
+				if (!user || !user?.hashedPassword) {
 					throw new Error('User not found')
 				}
 				const passwordMatch = await bcrypt.compare(credentials.password, user.hashedPassword)
@@ -36,13 +36,17 @@ export const authOptions = {
 			}
 		})
 	],
-	callbacks:{
-		async jwt ({token, user}) {
+	callbacks: {
+		async jwt({ token, user }) {
 			if (user) token.role = user.role
+			if (user) token.category = user.category
+			if (user) token.phoneNumber = user.phoneNumber
 			return token
 		},
-		async session({session, token}) {
+		async session({ session, token }) {
 			if (session?.user) session.user.role = token.role
+			if (session?.user) session.user.category = token.category
+			if (session?.user) session.user.phoneNumber = token.phoneNumber
 			return session
 		}
 	},

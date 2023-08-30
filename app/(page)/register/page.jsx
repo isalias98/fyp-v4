@@ -2,18 +2,20 @@
 
 import { useState } from 'react';
 import axios from 'axios';
-
 import React from 'react';
 import { toast } from 'react-hot-toast';
+import { useRouter } from 'next/navigation';
 
 const Register = () => {
-	const [ data, setData ] = useState({ name: '', email: '', password: '', role: '', categories: '' });
+	const router = useRouter()
+	const [data, setData] = useState({ name: '', email: '', password: '', role: '', category: '', phoneNumber: '' });
 	const signUp = async (e) => {
 		e.preventDefault();
 		axios
 			.post('/api/register', data)
 			.then(() => toast.success('User has been registered!'))
-			.catch(() => toast.error('Something went Wrong'));
+			.catch(() => toast.error('Something went Wrong'))
+			.finally(router.push("/login"))
 	};
 	return (
 		<div className="hero min-h-screen bg-base-200 pt-20">
@@ -43,6 +45,18 @@ const Register = () => {
 									placeholder="email"
 									value={data.email}
 									onChange={(e) => setData({ ...data, email: e.target.value })}
+									className="input input-bordered"
+								/>
+							</div>
+							<div className="form-control">
+								<label className="label">
+									<span className="label-text">phone number</span>
+								</label>
+								<input
+									type="text"
+									placeholder="your phone number"
+									value={data.phoneNumber}
+									onChange={(e) => setData({ ...data, phoneNumber: e.target.value })}
 									className="input input-bordered"
 								/>
 							</div>
@@ -87,8 +101,8 @@ const Register = () => {
 									</label>
 									{data.role === 'freelancer' ? (
 										<select
-											value={data.categories}
-											onChange={(e) => setData({ ...data, categories: e.target.value })}
+											value={data.category}
+											onChange={(e) => setData({ ...data, category: e.target.value })}
 											className="select select-primary w-full max-w-xs"
 										>
 											<option className="disabled selected">Your specialty</option>
