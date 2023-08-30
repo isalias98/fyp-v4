@@ -24,7 +24,7 @@ const jobLists = async () => {
 
     return (
         <div className="pt-20 pl-4">
-            <h1 className="text-4xl">Your posts</h1>
+            <h1 className="text-4xl">Avaiable Jobs</h1>
 
             <PostList posts={posts} user={user} />
         </div>
