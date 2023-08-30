@@ -19,9 +19,7 @@ const page = async ({ params }) => {
             <h1>User's Email : {user.email}</h1>
             <h1>User's Role : {user.role}</h1>
             <h1>User's Category : {user.category}</h1>
-            <h1>User's Rate : {!user.rating ? (<span>0</span>) : (
-                <span>{user.rating}</span>
-            )} </h1>
+            <h1>User's Phone number : {user.phoneNumber} </h1>
 
         </div>
 
